@@ -1,0 +1,26 @@
+title: Possible C2 Beacon — Suspicious Outbound Port
+id: a1b2c3d4-0003-4abc-8def-000000000003
+status: experimental
+description: Detects outbound connections to ports commonly used by C2 frameworks
+author: your-github-handle
+date: 2024/01/01
+references:
+  - https://attack.mitre.org/techniques/T1071/001/
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    dst_port|contains|any:
+      - '4444'
+      - '4445'
+      - '8888'
+      - '9999'
+      - '1337'
+      - '31337'
+falsepositives:
+  - Custom internal applications
+level: critical
+tags:
+  - attack.command_and_control
+  - attack.t1071.001
