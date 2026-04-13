@@ -1,0 +1,31 @@
+title: Suspicious PowerShell Execution
+id: a1b2c3d4-0002-4abc-8def-000000000002
+status: experimental
+description: Detects PowerShell with common offensive flags or download cradles
+author: your-github-handle
+date: 2024/01/01
+references:
+  - https://attack.mitre.org/techniques/T1059/001/
+logsource:
+  product: windows
+  service: sysmon
+  definition: 'Requires Sysmon EventID 1 (Process Creation)'
+detection:
+  selection:
+    EventID: 1
+    Image|endswith: '\powershell.exe'
+    CommandLine|contains|any:
+      - 'IEX'
+      - 'Invoke-Expression'
+      - 'DownloadString'
+      - '-NonInteractive'
+      - '-WindowStyle Hidden'
+      - '-EncodedCommand'
+      - 'bypass'
+condition: selection
+falsepositives:
+  - Legitimate admin scripts (review carefully)
+level: high
+tags:
+  - attack.execution
+  - attack.t1059.001
