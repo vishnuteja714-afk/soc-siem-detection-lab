@@ -6,7 +6,7 @@ and MITRE ATT&CK mapping at the L2 analyst level.
 
 ## Architecture
 
-![Lab Architecture](screenshots/architecture.png)
+![Lab Architecture](https://github.com/vishnuteja714-afk/soc-siem-detection-lab/blob/main/Architecture)
 
 | Component | Tool | Purpose |
 |-----------|------|---------|
