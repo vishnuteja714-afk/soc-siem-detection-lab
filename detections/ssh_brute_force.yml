@@ -1,0 +1,23 @@
+title: SSH Brute Force Attempt
+id: a1b2c3d4-0001-4abc-8def-000000000001
+status: experimental
+description: Detects repeated SSH authentication failures from a single source
+author: your-github-handle
+date: 2024/01/01
+references:
+  - https://attack.mitre.org/techniques/T1110/001/
+logsource:
+  product: linux
+  service: auth
+detection:
+  selection:
+    data.program: sshd
+    data.message|contains: 'Failed password'
+  timeframe: 60s
+  condition: selection | count() > 10
+falsepositives:
+  - Legitimate admin with mistyped password
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1110.001
